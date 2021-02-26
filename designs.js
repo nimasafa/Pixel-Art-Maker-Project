@@ -1,5 +1,5 @@
 // Select color input
-let color_picked = document.getElementById('colorPicker').value;
+const color_picked = document.getElementById('colorPicker');
 /* This code may be unnecesary now:
 const queryString = window.location.search;
 console.log(queryString);
@@ -16,6 +16,12 @@ const table = document.getElementById('pixelCanvas');
 
 // Select submit button
 const evt = document.getElementById('sizePicker');
+
+// Define function to update color in colorPicker
+
+function updateColor(e) {
+    color_picked.value = e.target.value;
+}
 
 // Define functions to update size variables
 function updateRowValue(e) {
@@ -50,5 +56,6 @@ function formSubmit(event) {
 document.addEventListener('DOMContentLoaded', function() {
     rows.addEventListener('input', updateRowValue);
     columns.addEventListener('input', updateColumnValue);
+    color_picked.addEventListener('input', updateColor);
     evt.addEventListener('submit', formSubmit);
 });
