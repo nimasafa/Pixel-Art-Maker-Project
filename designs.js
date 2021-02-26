@@ -8,10 +8,8 @@ const urlrows = urlParams.get('rows');
 const urlcolumns = urlParams.get('columns'); */
 
 // Select size input
-let rows = document.getElementById('inputHeight').value;
-let columns = document.getElementById('inputWidth').value;
-let rowNum = parseInt(rows, 10);
-let columnNum = parseInt(columns, 10);
+const rows = document.getElementById('inputHeight');
+const columns = document.getElementById('inputWidth');
 
 // Select table element
 const table = document.getElementById('pixelCanvas');
@@ -19,8 +17,17 @@ const table = document.getElementById('pixelCanvas');
 // Select submit button
 const evt = document.getElementById('sizePicker');
 
-// Define function makeGrid() to draw table based on size inputs
+// Define functions to update size variables
+function updateRowValue(e) {
+    rows.value.textContent = e.target.value;
+}
 
+function updateColumnValue(e) {
+    columns.value.textContent = e.target.value;
+}
+
+
+// Define function makeGrid() to draw table based on size inputs
 function makeGrid(rowNumber, columnNumber) {
 for (let r = 1; r <=rowNumber; r++) {
     for (let c = 1; c<=columnNumber; c++) {
@@ -30,6 +37,7 @@ for (let r = 1; r <=rowNumber; r++) {
     }
 }
 }
+
 // When size is submitted by the user, call makeGrid(rowNum, columnNum)
 function formSubmit(event) {
     console.log("Form Submitted!");
@@ -38,7 +46,9 @@ function formSubmit(event) {
     event.preventDefault();
   };
 
-// Add event listener to submit button
+// Add event listeners for inputs and submit button
 document.addEventListener('DOMContentLoaded', function() {
+    rows.addEventListener('input', updateRowValue);
+    columns.addEventListener('input', updateColumnValue);
     evt.addEventListener('submit', formSubmit);
 });
