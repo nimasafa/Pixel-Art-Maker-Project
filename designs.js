@@ -49,6 +49,9 @@ function makeGrid(rowNum, columnNum) {
         for (let c = 1; c<=columnNum; c++) {
             const newCell = document.createElement('td');
             // may need to add event listener here for individual cell
+            newCell.addEventListener('click', function respondToTheClick(evt) {
+                newCell.style.backgroundColor = color_picked.value;
+            });
             row.appendChild(newCell);
         }
         canvasBody.appendChild(row);
