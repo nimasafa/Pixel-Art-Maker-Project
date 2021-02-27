@@ -29,7 +29,7 @@ function updateColumnValue(e) {
     columnNumber = parseInt(columns.value, 10);
 }
 
-// Function to clear our any historical grid
+// Function to clear out historical grid (if any)
 function clearGrid() {
     while (canvas.hasChildNodes()) {
         canvas.removeChild(canvas.firstChild);
@@ -40,10 +40,10 @@ function clearGrid() {
 function makeGrid(rowNum, columnNum) {
     clearGrid();
     
-    // Creates a <tbody> element
+    // Create a <tbody> element
     let canvasBody = document.createElement('tbody');
 
-    // Creates cells within table grid
+    // Create cells within table grid
     for (let r = 1; r <=rowNum; r++) {
         let row = document.createElement('tr');
         for (let c = 1; c<=columnNum; c++) {
@@ -57,7 +57,7 @@ function makeGrid(rowNum, columnNum) {
         canvasBody.appendChild(row);
     }
 
-    // Put the canvasBody into the canvas
+    // Append the canvasBody grid to the canvas table
     canvas.appendChild(canvasBody);
 }
 
