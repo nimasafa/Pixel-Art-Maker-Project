@@ -63,7 +63,6 @@ function makeGrid(rowNum, columnNum) {
 
 // When size is submitted by the user, call makeGrid function
 function formSubmit(event) {
-    console.log("Form Submitted!");
     makeGrid(rowNumber, columnNumber);
     event.preventDefault();
   };
