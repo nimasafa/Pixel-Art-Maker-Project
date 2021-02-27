@@ -1,24 +1,19 @@
 // Select color input
 const color_picked = document.getElementById('colorPicker');
-/* This code may be unnecesary now:
-const queryString = window.location.search;
-console.log(queryString);
-const urlParams = new URLSearchParams(queryString);
-const urlrows = urlParams.get('rows');
-const urlcolumns = urlParams.get('columns'); */
 
 // Select size input
 const rows = document.getElementById('inputHeight');
 const columns = document.getElementById('inputWidth');
+let rowNumber = parseInt(rows.value, 10);
+let columnNumber = parseInt(columns.value, 10);
 
 // Select table element
-const table = document.getElementById('pixelCanvas');
+const canvas = document.getElementById('pixelCanvas');
 
 // Select submit button
 const evt = document.getElementById('sizePicker');
 
 // Define function to update color in colorPicker
-
 function updateColor(e) {
     color_picked.value = e.target.value;
 }
@@ -26,29 +21,47 @@ function updateColor(e) {
 // Define functions to update size variables
 function updateRowValue(e) {
     rows.value.textContent = e.target.value;
+    rowNumber = parseInt(rows.value, 10);
 }
 
 function updateColumnValue(e) {
     columns.value.textContent = e.target.value;
+    columnNumber = parseInt(columns.value, 10);
 }
 
+// Function to clear our any historical grid
+function clearGrid() {
+    while (canvas.hasChildNodes()) {
+        canvas.removeChild(canvas.firstChild);
+    } 
+}
 
 // Define function makeGrid() to draw table based on size inputs
-function makeGrid(rowNumber, columnNumber) {
-for (let r = 1; r <=rowNumber; r++) {
-    for (let c = 1; c<=columnNumber; c++) {
-        const newCell = document.createElement('tr');
-        // may need to add event listener here for individual cell
-        table.appendChild(newCell);
+function makeGrid(rowNum, columnNum) {
+    clearGrid();
+    
+    // Creates a <tbody> element
+    let canvasBody = document.createElement('tbody');
+
+    // Creates cells within table grid
+    for (let r = 1; r <=rowNum; r++) {
+        let row = document.createElement('tr');
+        for (let c = 1; c<=columnNum; c++) {
+            const newCell = document.createElement('td');
+            // may need to add event listener here for individual cell
+            row.appendChild(newCell);
+        }
+        canvasBody.appendChild(row);
     }
-}
+
+    // Put the canvasBody into the canvas
+    canvas.appendChild(canvasBody);
 }
 
-// When size is submitted by the user, call makeGrid(rowNum, columnNum)
+// When size is submitted by the user, call makeGrid function
 function formSubmit(event) {
     console.log("Form Submitted!");
-    //Need to fix makeGrid function
-    //makeGrid(rowNum, columnNum);
+    makeGrid(rowNumber, columnNumber);
     event.preventDefault();
   };
 
